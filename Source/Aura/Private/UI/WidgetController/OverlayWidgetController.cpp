@@ -9,9 +9,7 @@ void UOverlayWidgetController::BroadcastInitialValues()
 {
 	Super::BroadcastInitialValues();
 
-	if (const UAuraAttributeSet* AuraAttributeSet = Cast<UAuraAttributeSet>(AttributeSet); IsValid(AuraAttributeSet))
-	{
-		OnHealthChanged.Broadcast(AuraAttributeSet->GetHealth());
-		OnMaxHealthChanged.Broadcast(AuraAttributeSet->GetMaxHealth());
-	}
+	const UAuraAttributeSet* AuraAttributeSet = CastChecked<UAuraAttributeSet>(AttributeSet);
+	OnHealthChanged.Broadcast(AuraAttributeSet->GetHealth());
+	OnMaxHealthChanged.Broadcast(AuraAttributeSet->GetMaxHealth());
 }
