@@ -6,6 +6,18 @@
 #include "UI/Widget/AuraUserWidget.h"
 #include "UI/WidgetController/OverlayWidgetController.h"
 
+UOverlayWidgetController* AAuraHUD::GetOverlayWidgetController(const FWidgetControllerParams& Params)
+{
+	if (OverlayWidgetController == nullptr)
+	{
+		OverlayWidgetController = NewObject<UOverlayWidgetController>(this, OverlayWidgetControllerClass);
+		OverlayWidgetController->SetUserWidgetParams(Params);
+		OverlayWidgetController->BindCallbacksToDependencies();
+		return OverlayWidgetController;
+	}
+	return OverlayWidgetController;
+}
+
 void AAuraHUD::InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySystemComponent* ASC, UAttributeSet* AS)
 {
 	checkf(OverlayWidgetClass, TEXT("覆盖小部件类未初始化，请填写BP_AuraHUD"));
@@ -23,13 +35,3 @@ void AAuraHUD::InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySyst
 	Widget->AddToViewport();
 }
 
-UOverlayWidgetController* AAuraHUD::GetOverlayWidgetController(const FWidgetControllerParams& Params)
-{
-	if (OverlayWidgetController == nullptr)
-	{
-		OverlayWidgetController = NewObject<UOverlayWidgetController>(this, OverlayWidgetControllerClass);
-		OverlayWidgetController->SetUserWidgetParams(Params);
-		return OverlayWidgetController;
-	}
-	return OverlayWidgetController;
-}
