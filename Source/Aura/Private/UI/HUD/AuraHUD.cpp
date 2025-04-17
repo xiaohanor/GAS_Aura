@@ -4,13 +4,32 @@
 #include "UI/HUD/AuraHUD.h"
 
 #include "UI/Widget/AuraUserWidget.h"
+#include "UI/WidgetController/OverlayWidgetController.h"
 
-void AAuraHUD::BeginPlay()
+void AAuraHUD::InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySystemComponent* ASC, UAttributeSet* AS)
 {
-	Super::BeginPlay();
+	checkf(OverlayWidgetClass, TEXT("覆盖小部件类未初始化，请填写BP_AuraHUD"));
+	checkf(OverlayWidgetControllerClass, TEXT("小部件控制器类未初始化，请填写BP_AuraHUD"));
 
-	if (UAuraUserWidget* Widget = CreateWidget<UAuraUserWidget>(GetWorld(), UserWidgetClass); IsValid(Widget))
+	UUserWidget* Widget = CreateWidget<UUserWidget>(GetWorld(), OverlayWidgetClass);
+	OverlayWidget = Cast<UAuraUserWidget>(Widget);
+	
+	const FWidgetControllerParams WidgetControllerParams(PC, PS, ASC, AS);
+	UOverlayWidgetController* WidgetController = GetOverlayWidgetController(WidgetControllerParams);
+ 
+	OverlayWidget->SetWidgetController(WidgetController);
+	WidgetController->BroadcastInitialValues();
+	
+	Widget->AddToViewport();
+}
+
+UOverlayWidgetController* AAuraHUD::GetOverlayWidgetController(const FWidgetControllerParams& Params)
+{
+	if (OverlayWidgetController == nullptr)
 	{
-		Widget->AddToViewport();
+		OverlayWidgetController = NewObject<UOverlayWidgetController>(this, OverlayWidgetControllerClass);
+		OverlayWidgetController->SetUserWidgetParams(Params);
+		return OverlayWidgetController;
 	}
+	return OverlayWidgetController;
 }
