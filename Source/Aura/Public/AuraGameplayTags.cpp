@@ -1,5 +1,4 @@
 ﻿#include "AuraGameplayTags.h"
-#include "GameplayTagsManager.h"
 
 namespace AuraGameplayTags::Attributes
 {
@@ -24,4 +23,13 @@ namespace AuraGameplayTags::Attributes
 		UE_DEFINE_GAMEPLAY_TAG_COMMENT(MaxHealth, "AuraGameplayTags.Attributes.Secondary.MaxHealth", "最大生命值");
 		UE_DEFINE_GAMEPLAY_TAG_COMMENT(MaxMana, "AuraGameplayTags.Attributes.Secondary.MaxMana", "最大法力值");
 	}
+}
+
+namespace AuraGameplayTags::InputTags
+{
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(LMB, "AuraGameplayTags.InputTags.LMB", "鼠标左键");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(RMB, "AuraGameplayTags.InputTags.RMB", "鼠标右键");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(MMB, "AuraGameplayTags.InputTags.MMB", "鼠标中键");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(one, "AuraGameplayTags.InputTags.1", "数字键1");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(two, "AuraGameplayTags.InputTags.2", "数字键2");
 }

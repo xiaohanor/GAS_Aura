@@ -28,4 +28,13 @@ namespace AuraGameplayTags::Attributes
 	}
 }
 
+namespace AuraGameplayTags::InputTags
+{
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(LMB);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(RMB);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(MMB);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(one);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(two);
+}
+
 
