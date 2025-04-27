@@ -53,4 +53,9 @@ protected:
 	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;
 
 	void AddCharacterAbilities();
+
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	FName WeaponTipSocketName;
+ 
+	virtual FVector GetCombatSocketLocation() override;
 };
