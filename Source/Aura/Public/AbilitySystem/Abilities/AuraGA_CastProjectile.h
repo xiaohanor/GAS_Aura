@@ -20,4 +20,8 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TSubclassOf<AAuraProjectile> ProjectileClass;
+	
+private:
+	UFUNCTION(BlueprintCallable)
+	void SpawnProjectile();
 };
