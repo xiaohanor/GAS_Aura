@@ -9,11 +9,10 @@
 #include "NavigationPath.h"
 #include "NavigationSystem.h"
 #include "AbilitySystem/AuraAbilitySystemComponent.h"
+#include "Aura/Aura.h"
 #include "Components/SplineComponent.h"
 #include "Input/AuraInputComponent.h"
 #include "Interaction/EnemyInterface.h"
-
-#define ECC_Nav ECC_GameTraceChannel1
 
 AAuraPlayerController::AAuraPlayerController()
 {
