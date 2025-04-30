@@ -11,11 +11,10 @@ void UAuraGA_CastProjectile::ActivateAbility(const FGameplayAbilitySpecHandle Ha
                                              const FGameplayEventData* TriggerEventData)
 {
 	Super::ActivateAbility(Handle, ActorInfo, ActivationInfo, TriggerEventData);
-
 	
 }
 
-void UAuraGA_CastProjectile::SpawnProjectile()
+void UAuraGA_CastProjectile::SpawnProjectile(const FVector& TargetLocation)
 {
 	const bool bIsServer = GetAvatarActorFromActorInfo()->HasAuthority();
 	if (!bIsServer) return;
@@ -24,9 +23,12 @@ void UAuraGA_CastProjectile::SpawnProjectile()
 	{
 		const FVector SocketLocation = CombatInterface->GetCombatSocketLocation();
  
+		FRotator TargetRotation = (TargetLocation - SocketLocation).Rotation();
+		TargetRotation.Pitch = 0.f;
+		
 		FTransform SpawnTransform;
 		SpawnTransform.SetLocation(SocketLocation);
-		//TODO: Set the Projectile Rotation
+		SpawnTransform.SetRotation(TargetRotation.Quaternion());
  		
 		AAuraProjectile* Projectile = GetWorld()->SpawnActorDeferred<AAuraProjectile>(
 			ProjectileClass,
@@ -40,3 +42,4 @@ void UAuraGA_CastProjectile::SpawnProjectile()
 		Projectile->FinishSpawning(SpawnTransform);
 	}
 }
+
