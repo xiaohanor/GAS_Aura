@@ -5,6 +5,7 @@
 
 #include "AbilitySystemComponent.h"
 #include "AbilitySystem/AuraAbilitySystemComponent.h"
+#include "AbilitySystem/AuraAbilitySystemLibrary.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Player/AuraPlayerController.h"
 #include "Player/AuraPlayerState.h"
@@ -40,11 +41,11 @@ void AAuraCharacter::OnRep_PlayerState()
 	InitAbilityInfo();
 }
 
-int32 AAuraCharacter::GetPlayerLevel()
+int32 AAuraCharacter::GetPlayerLevel() const
 {
 	const AAuraPlayerState* AuraPlayerState = GetPlayerState<AAuraPlayerState>();
 	check(AuraPlayerState);
-	return AuraPlayerState->GetPlayerLevel();
+	return AuraPlayerState->GetPlayerLevel();	
 }
 
 void AAuraCharacter::InitAbilityInfo()
@@ -66,4 +67,9 @@ void AAuraCharacter::InitAbilityInfo()
 		}
 	}
 	InitializeDefaultAttribute();
+}
+
+void AAuraCharacter::InitializeDefaultAttribute() const
+{
+	UAuraAbilitySystemLibrary::InitializeDefaultAttributes(this, CharacterClass, GetPlayerLevel(), AbilitySystemComponent);
 }

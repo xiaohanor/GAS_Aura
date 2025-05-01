@@ -18,10 +18,10 @@ public:
 	virtual void OnRep_PlayerState() override;
 
 	//~ CombatInterface
-	virtual int32 GetPlayerLevel() override;
+	virtual int32 GetPlayerLevel() const override;
 	//~ CombatInterface
 
-
-private:
+protected:
 	virtual void InitAbilityInfo() override;
+	virtual void InitializeDefaultAttribute() const override;
 };
