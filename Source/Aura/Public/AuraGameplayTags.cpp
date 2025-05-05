@@ -33,3 +33,8 @@ namespace AuraGameplayTags::InputTags
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(one, "AuraGameplayTags.InputTags.1", "数字键1");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(two, "AuraGameplayTags.InputTags.2", "数字键2");
 }
+
+namespace AuraGameplayTags::Damage
+{
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Damage, "Damage", "伤害");
+}

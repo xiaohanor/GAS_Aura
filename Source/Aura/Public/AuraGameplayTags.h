@@ -37,4 +37,7 @@ namespace AuraGameplayTags::InputTags
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(two);
 }
 
-
+namespace AuraGameplayTags::Damage
+{
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Damage);
+}
