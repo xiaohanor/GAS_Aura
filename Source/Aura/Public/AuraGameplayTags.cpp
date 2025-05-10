@@ -38,3 +38,8 @@ namespace AuraGameplayTags::Damage
 {
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Damage, "Damage", "伤害");
 }
+
+namespace AuraGameplayTags::Effects
+{
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(HitReact, "Effects.HitReact", "击中反应");
+}

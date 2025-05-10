@@ -21,11 +21,13 @@ class AURA_API AAuraCharacterBase : public ACharacter, public IAbilitySystemInte
 
 public:
 	AAuraCharacterBase();
-
-protected:
-	virtual void BeginPlay() override;
+	
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	UAttributeSet* GetAttributeSet() const { return AttributeSet; }
+	virtual UAnimMontage* GetHitReactMontage_Implementation() override;
+	
+protected:
+	virtual void BeginPlay() override;
 	
 	UPROPERTY()
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
@@ -38,6 +40,9 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Combat")
 	FName WeaponTipSocketName;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Combat")
+	TObjectPtr<UAnimMontage> HitReactMontage;
 	
 	virtual FVector GetCombatSocketLocation() override;
 	
