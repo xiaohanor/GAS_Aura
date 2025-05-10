@@ -66,6 +66,46 @@ void AAuraCharacterBase::AddCharacterAbilities()
 	AuraASC->AddCharacterAbilities(StartupAbilities);
 }
 
+void AAuraCharacterBase::Die()
+{
+	Weapon->DetachFromComponent(FDetachmentTransformRules(EDetachmentRule::KeepWorld, true));
+	MulticastDie();
+}
+
+void AAuraCharacterBase::Dissolve()
+{
+	if (IsValid(DissolveMaterialInstance) && IsValid(WeaponDissolveMaterialInstance))
+	{
+		TArray<UMaterialInstanceDynamic*> DynamicMIs;
+
+		UMaterialInstanceDynamic* MatIns = UMaterialInstanceDynamic::Create(DissolveMaterialInstance, this);
+		GetMesh()->SetMaterial(0, MatIns);
+		DynamicMIs.AddUnique(MatIns);
+
+		UMaterialInstanceDynamic* WeaponMatIns = UMaterialInstanceDynamic::Create(WeaponDissolveMaterialInstance, this);
+		Weapon->SetMaterial(0, WeaponMatIns);
+		DynamicMIs.AddUnique(WeaponMatIns);
+
+		StartDissolveTimeline(DynamicMIs);
+	}
+}
+
+void AAuraCharacterBase::MulticastDie_Implementation()
+{
+	Weapon->SetSimulatePhysics(true);
+	Weapon->SetEnableGravity(true);
+	Weapon->SetCollisionEnabled(ECollisionEnabled::PhysicsOnly);
+
+	GetMesh()->SetSimulatePhysics(true);
+	GetMesh()->SetEnableGravity(true);
+	GetMesh()->SetCollisionEnabled(ECollisionEnabled::PhysicsOnly);
+	GetMesh()->SetCollisionResponseToAllChannels(ECR_Block);	
+	//GetMesh()->SetCollisionResponseToChannel(ECC_WorldStatic, ECR_Block);
+	
+	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	Dissolve();
+}
+
 FVector AAuraCharacterBase::GetCombatSocketLocation()
 {
 	check(Weapon);
