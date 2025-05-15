@@ -10,6 +10,7 @@
 #include "GameFramework/Character.h"
 #include "Interaction/CombatInterface.h"
 #include "Net/UnrealNetwork.h"
+#include "Player/AuraPlayerController.h"
 
 UAuraAttributeSet::UAuraAttributeSet()
 {
@@ -103,7 +104,8 @@ void UAuraAttributeSet::PostGameplayEffectExecute(const struct FGameplayEffectMo
 		{
 			const float NewHealth = GetHealth() - LocalIncomingDamage;
 			SetHealth(FMath::Clamp(NewHealth, 0.f, GetMaxHealth()));
- 
+
+			// 判断伤害是否足以致死，是则调用死亡方法，不是则播放受击动画
 			const bool bFatal = NewHealth <= 0.f;
 			if (bFatal)
 			{
@@ -117,6 +119,21 @@ void UAuraAttributeSet::PostGameplayEffectExecute(const struct FGameplayEffectMo
 				FGameplayTagContainer TagContainer;
 				TagContainer.AddTag(AuraGameplayTags::Effects::HitReact);
 				EffectProperties.TargetASC->TryActivateAbilitiesByTag(TagContainer);
+			}
+			ShowFloatingText(EffectProperties, LocalIncomingDamage);
+		}
+	}
+}
+
+void UAuraAttributeSet::ShowFloatingText(const FEffectProperties& Props, float Damage) const
+{
+	if (Props.SourceCharacter != Props.TargetCharacter)
+	{
+		for (FConstPlayerControllerIterator It = GetWorld()->GetPlayerControllerIterator(); It; ++It)
+		{
+			if (auto AuraPC = CastChecked<AAuraPlayerController>(It->Get()))
+			{
+				AuraPC->ShowDamageNumber(Damage, Props.TargetCharacter);
 			}
 		}
 	}
