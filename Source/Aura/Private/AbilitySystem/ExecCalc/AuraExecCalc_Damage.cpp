@@ -4,6 +4,7 @@
 #include "AbilitySystem/ExecCalc/AuraExecCalc_Damage.h"
 
 #include "AbilitySystemComponent.h"
+#include "AuraAbilityTypes.h"
 #include "AuraGameplayTags.h"
 #include "AbilitySystem/AuraAbilitySystemLibrary.h"
 #include "AbilitySystem/AuraAttributeSet.h"
@@ -59,6 +60,7 @@ void UAuraExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExe
 	const UCharacterClassInfo* CharacterClassInfo = UAuraAbilitySystemLibrary::GetCharacterClassInfo(SourceAvatar);
 	
 	const FGameplayEffectSpec& Spec = ExecutionParams.GetOwningSpec();
+	FGameplayEffectContextHandle ContextHandle = Spec.GetContext();
 
 	const FGameplayTagContainer* SourceTags = Spec.CapturedSourceTags.GetAggregatedTags();
 	const FGameplayTagContainer* TargetTags = Spec.CapturedTargetTags.GetAggregatedTags();
@@ -76,6 +78,7 @@ void UAuraExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExe
 	// 如果格挡成功则伤害减半
 	const bool bBlocked{FMath::FRandRange(UE_SMALL_NUMBER, 100.f) <= TargetBlockChance};
 	Damage = bBlocked ? Damage / 2.f : Damage;
+	UAuraAbilitySystemLibrary::SetIsBlockedHit(ContextHandle, bBlocked);
 	
 	// 捕获目标的护甲值
 	float TargetArmor = 0.f;
@@ -121,6 +124,7 @@ void UAuraExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExe
 	// 有效暴击率等于 源暴击率 - 目标暴击抵抗 * 暴击伤害因数
 	const float EffectiveCriticalHitChance = SourceCriticalHitChance - TargetCriticalHitResistance * CriticalHitResistanceCoefficient;
 	const bool bCriticalHit{FMath::FRandRange(UE_SMALL_NUMBER, 100.f) <= EffectiveCriticalHitChance};
+	UAuraAbilitySystemLibrary::SetIsCriticalHit(ContextHandle, bCriticalHit);
 
 	// 如果暴击则伤害翻倍并加上暴击伤害
 	Damage = bCriticalHit ? 2.f * Damage + SourceCriticalHitDamage : Damage;

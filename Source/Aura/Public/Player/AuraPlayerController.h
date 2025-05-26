@@ -29,7 +29,7 @@ public:
 	AAuraPlayerController();
 
 	UFUNCTION(Client, Reliable)
-	void ShowDamageNumber(float DamageAmount, ACharacter* TargetCharacter);
+	void ShowDamageNumber(float DamageAmount, ACharacter* TargetCharacter, bool IsCriticalHit, bool IsBlockedHit);
 
 protected:
 	virtual void PlayerTick(float DeltaTime) override;
@@ -64,7 +64,9 @@ private:
 	UAuraAbilitySystemComponent* GetASC();
 
 	//鼠标点击移动//
+	UPROPERTY()
 	TObjectPtr<UNavigationSystemV1> NavSys;
+	
 	FVector CachedDestination = FVector::ZeroVector;
 	float FollowTime = 0.f;
 	float ShortPressThreshold = 0.5f;
@@ -78,6 +80,7 @@ private:
 	TObjectPtr<USplineComponent> Spline;
 
 	void AutoRun();
+	//鼠标点击移动//
 
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<UAuraDamageTextComponent> DamageTextComponentClass;
