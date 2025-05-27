@@ -127,7 +127,6 @@ void AAuraPlayerController::CreatPathSpline()
 					for (const FVector& PathPoint : NavPath->PathPoints)
 					{
 						Spline->AddSplinePoint(PathPoint, ESplineCoordinateSpace::World);
-						DrawDebugSphere(GetWorld(), PathPoint, 8.f, 8, FColor::Green, false, 5.f);
 					}
 					bAutoRunning = true;
 				}

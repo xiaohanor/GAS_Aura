@@ -67,9 +67,18 @@ void UAuraExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExe
 	FAggregatorEvaluateParameters EvaluationParameters;
 	EvaluationParameters.SourceTags = SourceTags;
 	EvaluationParameters.TargetTags = TargetTags;
-
-	// 获取伤害 set by caller
-	float Damage = Spec.GetSetByCallerMagnitude(AuraGameplayTags::Damage::Damage);
+	
+	float Damage = 0.f;
+	FGameplayTagContainer AllDamageTags = UGameplayTagsManager::Get().RequestGameplayTagChildren(AuraGameplayTags::Damage::Damage);
+	FGameplayTagContainer AllResistanceTags = UGameplayTagsManager::Get().RequestGameplayTagChildren(AuraGameplayTags::Resilience::Resilience);
+	for (int32 i = 0; i < AllDamageTags.Num(); ++i)
+	{
+		const FGameplayTag& DamageTag = AllDamageTags.GetByIndex(i);
+		const FGameplayTag& ResistanceTag = AllResistanceTags.GetByIndex(i);
+ 
+		// 获取伤害 set by caller
+		Damage += Spec.GetSetByCallerMagnitude(DamageTag);
+	}
 
 	// 捕获目标的格挡概率，决定是否成功格挡
 	float TargetBlockChance = 0.f;

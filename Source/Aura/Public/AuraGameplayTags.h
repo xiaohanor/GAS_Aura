@@ -40,6 +40,19 @@ namespace AuraGameplayTags::InputTags
 namespace AuraGameplayTags::Damage
 {
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Damage);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Damage_Fire);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Damage_Lightning);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Damage_Ice);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Damage_Physical);
+}
+
+namespace AuraGameplayTags::Resilience
+{
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Resilience);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Resilience_Fire);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Resilience_Lightning);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Resilience_Ice);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Resilience_Physical);
 }
 
 namespace AuraGameplayTags::Effects  

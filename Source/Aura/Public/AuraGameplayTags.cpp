@@ -37,6 +37,19 @@ namespace AuraGameplayTags::InputTags
 namespace AuraGameplayTags::Damage
 {
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Damage, "Damage", "伤害");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Damage_Fire, "Damage.Fire", "火焰伤害");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Damage_Ice, "Damage.Ice", "冰霜伤害");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Damage_Lightning, "Damage.Lightning", "闪电伤害");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Damage_Physical, "Damage.Physical", "物理伤害");
+}
+
+namespace AuraGameplayTags::Resilience
+{
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Resilience, "Resilience", "抗性");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Resilience_Fire, "Resilience.Fire", "火焰抗性");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Resilience_Ice, "Resilience.Ice", "冰霜抗性");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Resilience_Lightning, "Resilience.Lightning", "闪电抗性");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Resilience_Physical, "Resilience.Physical", "物理抗性");
 }
 
 namespace AuraGameplayTags::Effects
