@@ -70,6 +70,8 @@ void AAuraProjectile::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, 
 	}
 	else
 	{
+		SetActorHiddenInGame(true);
+		Sphere->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 		bHit = true;
 	}
 }
