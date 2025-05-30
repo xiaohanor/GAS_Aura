@@ -19,6 +19,13 @@ struct AuraDamageStatics
 	DECLARE_ATTRIBUTE_CAPTUREDEF(CriticalHitChance);
 	DECLARE_ATTRIBUTE_CAPTUREDEF(CriticalHitDamage);
 	DECLARE_ATTRIBUTE_CAPTUREDEF(CriticalHitResistance);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(FireResistance);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(LightningResistance);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(IceResistance);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(PhysicalResistance);
+
+	TMap<FGameplayTag, FGameplayEffectAttributeCaptureDefinition> TagsToCaptureDefs;
+	
 	AuraDamageStatics()
 	{
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UAuraAttributeSet, Armor, Target, false);
@@ -27,6 +34,22 @@ struct AuraDamageStatics
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UAuraAttributeSet, CriticalHitChance, Source, false);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UAuraAttributeSet, CriticalHitDamage, Source, false);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UAuraAttributeSet, CriticalHitResistance, Target, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UAuraAttributeSet, FireResistance, Target, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UAuraAttributeSet, LightningResistance, Target, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UAuraAttributeSet, IceResistance, Target, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UAuraAttributeSet, PhysicalResistance, Target, false);
+
+		TagsToCaptureDefs.Add(AuraGameplayTags::Attributes::Secondary::Armor, ArmorDef);
+		TagsToCaptureDefs.Add(AuraGameplayTags::Attributes::Secondary::ArmorPenetration, ArmorPenetrationDef);
+		TagsToCaptureDefs.Add(AuraGameplayTags::Attributes::Secondary::BlockChance, BlockChanceDef);
+		TagsToCaptureDefs.Add(AuraGameplayTags::Attributes::Secondary::CriticalHitChance, CriticalHitChanceDef);
+		TagsToCaptureDefs.Add(AuraGameplayTags::Attributes::Secondary::CriticalHitDamage, CriticalHitDamageDef);
+		TagsToCaptureDefs.Add(AuraGameplayTags::Attributes::Secondary::CriticalHitResistance, CriticalHitResistanceDef);
+		
+		TagsToCaptureDefs.Add(AuraGameplayTags::Resilience::Resilience_Fire, FireResistanceDef);
+		TagsToCaptureDefs.Add(AuraGameplayTags::Resilience::Resilience_Lightning, LightningResistanceDef);
+		TagsToCaptureDefs.Add(AuraGameplayTags::Resilience::Resilience_Ice, IceResistanceDef);
+		TagsToCaptureDefs.Add(AuraGameplayTags::Resilience::Resilience_Physical, PhysicalResistanceDef);
 	}
 };
 
@@ -45,6 +68,10 @@ UAuraExecCalc_Damage::UAuraExecCalc_Damage()
 	RelevantAttributesToCapture.Add(DamageStatics().CriticalHitChanceDef);
 	RelevantAttributesToCapture.Add(DamageStatics().CriticalHitDamageDef);
 	RelevantAttributesToCapture.Add(DamageStatics().CriticalHitResistanceDef);
+	RelevantAttributesToCapture.Add(DamageStatics().FireResistanceDef);
+	RelevantAttributesToCapture.Add(DamageStatics().LightningResistanceDef);
+	RelevantAttributesToCapture.Add(DamageStatics().IceResistanceDef);
+	RelevantAttributesToCapture.Add(DamageStatics().PhysicalResistanceDef);
 }
 
 void UAuraExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecutionParameters& ExecutionParams,
@@ -67,7 +94,8 @@ void UAuraExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExe
 	FAggregatorEvaluateParameters EvaluationParameters;
 	EvaluationParameters.SourceTags = SourceTags;
 	EvaluationParameters.TargetTags = TargetTags;
-	
+
+	// 通过调用者获取伤害
 	float Damage = 0.f;
 	FGameplayTagContainer AllDamageTags = UGameplayTagsManager::Get().RequestGameplayTagChildren(AuraGameplayTags::Damage::Damage);
 	FGameplayTagContainer AllResistanceTags = UGameplayTagsManager::Get().RequestGameplayTagChildren(AuraGameplayTags::Resilience::Resilience);
@@ -75,9 +103,19 @@ void UAuraExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExe
 	{
 		const FGameplayTag& DamageTag = AllDamageTags.GetByIndex(i);
 		const FGameplayTag& ResistanceTag = AllResistanceTags.GetByIndex(i);
- 
-		// 获取伤害 set by caller
-		Damage += Spec.GetSetByCallerMagnitude(DamageTag);
+
+		checkf(AuraDamageStatics().TagsToCaptureDefs.Contains(ResistanceTag), TEXT("不存在的抵抗标签: %s"), *ResistanceTag.ToString());
+		const FGameplayEffectAttributeCaptureDefinition CaptureDef = AuraDamageStatics().TagsToCaptureDefs[ResistanceTag];
+
+		float DamageTypeValue = Spec.GetSetByCallerMagnitude(DamageTag);
+		float Resistance = 0.f;
+		ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(CaptureDef, EvaluationParameters, Resistance);
+		Resistance = FMath::Clamp(Resistance, 0.f, 100.f);
+
+		// 元素抗性伤害减免
+		DamageTypeValue *= ( 100.f - Resistance ) / 100.f;
+		
+		Damage += DamageTypeValue;
 	}
 
 	// 捕获目标的格挡概率，决定是否成功格挡
