@@ -8,6 +8,8 @@
 #include "UI/WidgetController/OverlayWidgetController.h"
 #include "AuraEnemy.generated.h"
 
+class UBehaviorTree;
+class AAuraAIController;
 class UWidgetComponent;
 
 UCLASS()
@@ -47,6 +49,7 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
+	virtual void PossessedBy(AController* NewController) override;
 	virtual void InitAbilityInfo() override;
 	virtual void InitializeDefaultAttribute() const override;
 
@@ -57,4 +60,10 @@ protected:
 	TObjectPtr<UWidgetComponent> HealthBar;
 
 	void BindToHealthBar();
+
+	UPROPERTY()
+	TObjectPtr<AAuraAIController> AIController;
+
+	UPROPERTY(EditAnywhere, Category = "AI")
+	TObjectPtr<UBehaviorTree> BehaviorTree;
 };
