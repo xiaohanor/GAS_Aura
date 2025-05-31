@@ -56,3 +56,8 @@ namespace AuraGameplayTags::Effects
 {
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(HitReact, "Effects.HitReact", "击中反应");
 }
+
+namespace AuraGameplayTags::Abilities
+{
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Attack, "Abilities.Attack", "攻击");
+}

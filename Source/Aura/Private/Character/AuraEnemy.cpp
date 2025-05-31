@@ -67,7 +67,7 @@ void AAuraEnemy::BeginPlay()
 
 	if (HasAuthority())
 	{
-		UAuraAbilitySystemLibrary::GiveStartupAbilities(this, AbilitySystemComponent);
+		UAuraAbilitySystemLibrary::GiveStartupAbilities(this, AbilitySystemComponent, CharacterClass);
 	}
 	AbilitySystemComponent->RegisterGameplayTagEvent(AuraGameplayTags::Effects::HitReact, EGameplayTagEventType::NewOrRemoved).AddUObject(
 			this,

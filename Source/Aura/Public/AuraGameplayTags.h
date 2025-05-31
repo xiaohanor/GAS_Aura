@@ -59,3 +59,8 @@ namespace AuraGameplayTags::Effects
 {
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(HitReact);
 }
+
+namespace AuraGameplayTags::Abilities
+{
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Attack);
+}
