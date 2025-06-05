@@ -24,7 +24,14 @@ public:
 	
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	UAttributeSet* GetAttributeSet() const { return AttributeSet; }
+	
+	/** Combat Interface */
 	virtual UAnimMontage* GetHitReactMontage_Implementation() override;
+	virtual void Die() override;
+	virtual FVector GetCombatSocketLocation_Implementation() override;
+	virtual bool IsDead_Implementation() const override;
+	virtual AActor* GetAvatar_Implementation() override;
+	/** Combat Interface */
 	
 protected:
 	virtual void BeginPlay() override;
@@ -44,8 +51,6 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Combat")
 	TObjectPtr<UAnimMontage> HitReactMontage;
 	
-	virtual FVector GetCombatSocketLocation_Implementation() override;
-	
 	virtual void InitAbilityInfo();
  
 	void ApplyEffectToSelf(const TSubclassOf<UGameplayEffect>& EffectClass, float Level) const;
@@ -59,13 +64,12 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Character Class Defaults")
 	ECharacterClass CharacterClass;
 
-	virtual void Die() override;
+	bool bDead = false;
 
 	UFUNCTION(NetMulticast, Reliable)
 	void MulticastDie();
 
 	/* 溶解效果 */
-
 	void Dissolve();
 
 	UFUNCTION(BlueprintImplementableEvent)
@@ -76,4 +80,6 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TObjectPtr<UMaterialInstance> WeaponDissolveMaterialInstance;
+	/* 溶解效果 */
+
 };
