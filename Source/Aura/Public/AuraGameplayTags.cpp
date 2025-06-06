@@ -61,3 +61,10 @@ namespace AuraGameplayTags::Abilities
 {
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Attack, "Abilities.Attack", "攻击");
 }
+
+namespace AuraGameplayTags::Montage
+{
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Montage_Attack_Weapon, "Montage.Attack.Weapon", "武器攻击动作");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Montage_Attack_RightHand, "Montage.Attack.RightHand", "右手攻击动作");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Montage_Attack_LeftHand, "Montage.Attack.LeftHand", "左手攻击动作");
+}

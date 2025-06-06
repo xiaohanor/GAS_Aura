@@ -5,6 +5,7 @@
 
 #include "AbilitySystemBlueprintLibrary.h"
 #include "AbilitySystemComponent.h"
+#include "AuraGameplayTags.h"
 #include "Actor/AuraProjectile.h"
 #include "Interaction/CombatInterface.h"
 
@@ -21,7 +22,7 @@ void UAuraGA_CastProjectile::SpawnProjectile(const FVector& TargetLocation)
 	const bool bIsServer = GetAvatarActorFromActorInfo()->HasAuthority();
 	if (!bIsServer) return;
 
-	const FVector SocketLocation = ICombatInterface::Execute_GetCombatSocketLocation(GetAvatarActorFromActorInfo());
+	const FVector SocketLocation = ICombatInterface::Execute_GetCombatSocketLocation(GetAvatarActorFromActorInfo(), AuraGameplayTags::Montage::Montage_Attack_Weapon);
 	FRotator TargetRotation = (TargetLocation - SocketLocation).Rotation();
 	TargetRotation.Pitch = 0.f;
 		

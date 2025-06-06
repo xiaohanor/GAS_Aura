@@ -3,6 +3,7 @@
 
 #include "Character//AuraCharacterBase.h"
 
+#include "AuraGameplayTags.h"
 #include "AbilitySystem/AuraAbilitySystemComponent.h"
 #include "Aura/Aura.h"
 #include "Components/CapsuleComponent.h"
@@ -107,10 +108,21 @@ void AAuraCharacterBase::MulticastDie_Implementation()
 	bDead = true;
 }
 
-FVector AAuraCharacterBase::GetCombatSocketLocation_Implementation()
+FVector AAuraCharacterBase::GetCombatSocketLocation_Implementation(const FGameplayTag& MontageTag)
 {
-	check(Weapon);
-	return Weapon->GetSocketLocation(WeaponTipSocketName);
+	if (MontageTag.MatchesTagExact(AuraGameplayTags::Montage::Montage_Attack_Weapon) && IsValid(Weapon))
+	{
+		return Weapon->GetSocketLocation("MuzzleSocket");
+	}
+	if (MontageTag.MatchesTagExact(AuraGameplayTags::Montage::Montage_Attack_LeftHand))
+	{
+		return GetMesh()->GetSocketLocation("LeftHandSocket");
+	}
+	if (MontageTag.MatchesTagExact(AuraGameplayTags::Montage::Montage_Attack_RightHand))
+	{
+		return GetMesh()->GetSocketLocation("RightHandSocket");
+	}
+	return FVector::ZeroVector;
 }
 
 bool AAuraCharacterBase::IsDead_Implementation() const
@@ -121,6 +133,11 @@ bool AAuraCharacterBase::IsDead_Implementation() const
 AActor* AAuraCharacterBase::GetAvatar_Implementation()
 {
 	return this;
+}
+
+TArray<FTaggedMontage> AAuraCharacterBase::GetAttackMontages_Implementation()
+{
+	return AttackMontages;
 }
 
 
