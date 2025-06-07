@@ -22,6 +22,8 @@ AAuraCharacter::AAuraCharacter()
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationRoll = false;
 	bUseControllerRotationYaw = false;
+
+	bFriendlyDamage = true;
 }
 
 void AAuraCharacter::PossessedBy(AController* NewController)

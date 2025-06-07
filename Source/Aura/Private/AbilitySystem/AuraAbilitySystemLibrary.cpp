@@ -139,6 +139,14 @@ void UAuraAbilitySystemLibrary::GetLivePlayersWithinRadius(const UObject* WorldC
 	}
 }
 
+bool UAuraAbilitySystemLibrary::IsOnSameTeam(const AActor* ActorA, const AActor* ActorB)
+{
+	const bool bBothArePlayers = ActorA->ActorHasTag(FName("Player")) && ActorB->ActorHasTag(FName("Player"));
+	const bool bBothAreEnemies = ActorA->ActorHasTag(FName("Enemy")) && ActorB->ActorHasTag(FName("Enemy"));
+	const bool bSameTeam = bBothArePlayers || bBothAreEnemies;
+	return bSameTeam;
+}
+
 void UAuraAbilitySystemLibrary::ApplyEffectToASC(UAbilitySystemComponent* ASC,
                                                  const TSubclassOf<UGameplayEffect>& GameplayEffectClass, float Level)
 {

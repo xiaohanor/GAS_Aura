@@ -35,6 +35,8 @@ AAuraEnemy::AAuraEnemy()
 	bUseControllerRotationRoll = false;
 	bUseControllerRotationYaw = false;
 	GetCharacterMovement()->bUseControllerDesiredRotation = true;
+
+	bFriendlyDamage = false;
 }
 
 void AAuraEnemy::HighlightActor()

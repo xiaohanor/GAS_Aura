@@ -73,22 +73,31 @@ void AAuraCharacterBase::Die()
 	MulticastDie();
 }
 
+bool AAuraCharacterBase::IsFriendlyDamage() const
+{
+	return bFriendlyDamage;
+}
+
 void AAuraCharacterBase::Dissolve()
 {
-	if (IsValid(DissolveMaterialInstance) && IsValid(WeaponDissolveMaterialInstance))
+	TArray<UMaterialInstanceDynamic*> DynamicMIs;
+
+	if (IsValid(DissolveMaterialInstance))
 	{
-		TArray<UMaterialInstanceDynamic*> DynamicMIs;
 
 		UMaterialInstanceDynamic* MatIns = UMaterialInstanceDynamic::Create(DissolveMaterialInstance, this);
 		GetMesh()->SetMaterial(0, MatIns);
 		DynamicMIs.AddUnique(MatIns);
+	}
 
+	if (IsValid(WeaponDissolveMaterialInstance))
+	{
 		UMaterialInstanceDynamic* WeaponMatIns = UMaterialInstanceDynamic::Create(WeaponDissolveMaterialInstance, this);
 		Weapon->SetMaterial(0, WeaponMatIns);
 		DynamicMIs.AddUnique(WeaponMatIns);
-
-		StartDissolveTimeline(DynamicMIs);
 	}
+
+	StartDissolveTimeline(DynamicMIs);
 }
 
 void AAuraCharacterBase::MulticastDie_Implementation()
@@ -112,15 +121,15 @@ FVector AAuraCharacterBase::GetCombatSocketLocation_Implementation(const FGamepl
 {
 	if (MontageTag.MatchesTagExact(AuraGameplayTags::Montage::Montage_Attack_Weapon) && IsValid(Weapon))
 	{
-		return Weapon->GetSocketLocation("MuzzleSocket");
+		return Weapon->GetSocketLocation(WeaponTipSocketName);
 	}
 	if (MontageTag.MatchesTagExact(AuraGameplayTags::Montage::Montage_Attack_LeftHand))
 	{
-		return GetMesh()->GetSocketLocation("LeftHandSocket");
+		return GetMesh()->GetSocketLocation(LeftHandSocketName);
 	}
 	if (MontageTag.MatchesTagExact(AuraGameplayTags::Montage::Montage_Attack_RightHand))
 	{
-		return GetMesh()->GetSocketLocation("RightHandSocket");
+		return GetMesh()->GetSocketLocation(RightHandSocketName);
 	}
 	return FVector::ZeroVector;
 }
