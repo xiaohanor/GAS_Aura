@@ -14,6 +14,8 @@
 #include "GameFramework/Character.h"
 #include "Input/AuraInputComponent.h"
 #include "Interaction/EnemyInterface.h"
+#include "InventoryManagement/Component/Inv_InventoryComponent.h"
+#include "Items/Components/Inv_ItemComponent.h"
 #include "UI/Widget/AuraDamageTextComponent.h"
 
 AAuraPlayerController::AAuraPlayerController()
@@ -41,6 +43,8 @@ void AAuraPlayerController::BeginPlay()
 	SetInputMode(InputMode);
 
 	NavSys = UNavigationSystemV1::GetCurrent(GetWorld()); // 获取导航系统
+
+	InventoryComponent = FindComponentByClass<UInv_InventoryComponent>(); // 获取库存组件
 }
 
 void AAuraPlayerController::PlayerTick(float DeltaTime)
@@ -85,8 +89,16 @@ void AAuraPlayerController::CursorTrace()
 	{
 		if (LastActor != ThisActor)
 		{
-			if (LastActor) LastActor->UnHighlightActor();
-			if (ThisActor) ThisActor->HighlightActor();
+			const TScriptInterface<IEnemyInterface> LastEnemyInterface = TScriptInterface<IEnemyInterface>(LastActor.Get());
+			const TScriptInterface<IEnemyInterface> ThisEnemyInterface = TScriptInterface<IEnemyInterface>(ThisActor.Get());
+			if (LastEnemyInterface)
+			{
+				LastEnemyInterface->UnHighlightActor();
+			}
+			if (ThisEnemyInterface)
+			{
+				ThisEnemyInterface->HighlightActor();
+			}
 		}
 	}
 }
@@ -95,8 +107,13 @@ void AAuraPlayerController::AbilityInputTagPressed(FGameplayTag InputTag)
 {
 	if (InputTag.MatchesTagExact(AuraGameplayTags::InputTags::LMB))
 	{
-		bTargeting = ThisActor ? true : false;
+		bTargeting = TScriptInterface<IEnemyInterface>(ThisActor.Get()) ? true : false;
 		bAutoRunning = false;
+		
+		// 临时方案：添加物品到库存中
+		UInv_ItemComponent* ItemComp = ThisActor->FindComponentByClass<UInv_ItemComponent>();
+		if (!IsValid(ItemComp) || !InventoryComponent.IsValid()) return;
+		InventoryComponent->TryAddItem(ItemComp);
 	}
 }
 

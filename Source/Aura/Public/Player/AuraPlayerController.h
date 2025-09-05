@@ -6,6 +6,7 @@
 #include "GameFramework/PlayerController.h"
 #include "AuraPlayerController.generated.h"
 
+class UInv_InventoryComponent;
 class UAuraDamageTextComponent;
 class UNavigationSystemV1;
 class USplineComponent;
@@ -37,6 +38,8 @@ protected:
 	virtual void SetupInputComponent() override;
 
 private:
+	TWeakObjectPtr<UInv_InventoryComponent> InventoryComponent;
+
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	TObjectPtr<UInputMappingContext> AuraContext;
 
@@ -46,8 +49,8 @@ private:
 	void Move(const FInputActionValue& InputValue);
 
 	void CursorTrace();
-	TScriptInterface<IEnemyInterface> LastActor;
-	TScriptInterface<IEnemyInterface> ThisActor;
+	TWeakObjectPtr<AActor> LastActor;
+	TWeakObjectPtr<AActor> ThisActor;
 	FHitResult CursorHit;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
