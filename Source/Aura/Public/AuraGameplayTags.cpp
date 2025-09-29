@@ -2,6 +2,12 @@
 
 namespace AuraGameplayTags::Attributes
 {
+	namespace Vital
+	{
+		UE_DEFINE_GAMEPLAY_TAG_COMMENT(Health, "AuraGameplayTags.Attributes.Vital.Health", "生命值");
+		UE_DEFINE_GAMEPLAY_TAG_COMMENT(Mana, "AuraGameplayTags.Attributes.Vital.Mana", "法力值");
+	}
+	
 	namespace Primary
 	{
 		UE_DEFINE_GAMEPLAY_TAG_COMMENT(Strength, "AuraGameplayTags.Attributes.Primary.Strength", "力量");
@@ -23,6 +29,15 @@ namespace AuraGameplayTags::Attributes
 		UE_DEFINE_GAMEPLAY_TAG_COMMENT(MaxHealth, "AuraGameplayTags.Attributes.Secondary.MaxHealth", "最大生命值");
 		UE_DEFINE_GAMEPLAY_TAG_COMMENT(MaxMana, "AuraGameplayTags.Attributes.Secondary.MaxMana", "最大法力值");
 	}
+	
+	namespace Resilience
+	{
+		UE_DEFINE_GAMEPLAY_TAG_COMMENT(Resilience, "AuraGameplayTags.Attributes.Resilience", "抗性");
+		UE_DEFINE_GAMEPLAY_TAG_COMMENT(Resilience_Fire, "AuraGameplayTags.Attributes.Resilience.Fire", "火焰抗性");
+		UE_DEFINE_GAMEPLAY_TAG_COMMENT(Resilience_Ice, "AuraGameplayTags.Attributes.Resilience.Ice", "冰霜抗性");
+		UE_DEFINE_GAMEPLAY_TAG_COMMENT(Resilience_Lightning, "AuraGameplayTags.Attributes.Resilience.Lightning", "闪电抗性");
+		UE_DEFINE_GAMEPLAY_TAG_COMMENT(Resilience_Physical, "AuraGameplayTags.Attributes.Resilience.Physical", "物理抗性");
+	}
 }
 
 namespace AuraGameplayTags::InputTags
@@ -36,35 +51,26 @@ namespace AuraGameplayTags::InputTags
 
 namespace AuraGameplayTags::Damage
 {
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Damage, "Damage", "伤害");
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Damage_Fire, "Damage.Fire", "火焰伤害");
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Damage_Ice, "Damage.Ice", "冰霜伤害");
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Damage_Lightning, "Damage.Lightning", "闪电伤害");
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Damage_Physical, "Damage.Physical", "物理伤害");
-}
-
-namespace AuraGameplayTags::Resilience
-{
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Resilience, "Resilience", "抗性");
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Resilience_Fire, "Resilience.Fire", "火焰抗性");
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Resilience_Ice, "Resilience.Ice", "冰霜抗性");
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Resilience_Lightning, "Resilience.Lightning", "闪电抗性");
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Resilience_Physical, "Resilience.Physical", "物理抗性");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Damage, "AuraGameplayTags.Damage", "伤害");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Damage_Fire, "AuraGameplayTags.Damage.Fire", "火焰伤害");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Damage_Ice, "AuraGameplayTags.Damage.Ice", "冰霜伤害");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Damage_Lightning, "AuraGameplayTags.Damage.Lightning", "闪电伤害");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Damage_Physical, "AuraGameplayTags.Damage.Physical", "物理伤害");
 }
 
 namespace AuraGameplayTags::Effects
 {
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(HitReact, "Effects.HitReact", "击中反应");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(HitReact, "AuraGameplayTags.Effects.HitReact", "击中反应");
 }
 
 namespace AuraGameplayTags::Abilities
 {
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Attack, "Abilities.Attack", "攻击");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Attack, "AuraGameplayTags.Abilities.Attack", "攻击");
 }
 
 namespace AuraGameplayTags::Montage
 {
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Montage_Attack_Weapon, "Montage.Attack.Weapon", "武器攻击动作");
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Montage_Attack_RightHand, "Montage.Attack.RightHand", "右手攻击动作");
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Montage_Attack_LeftHand, "Montage.Attack.LeftHand", "左手攻击动作");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Montage_Attack_Weapon, "AuraGameplayTags.Montage.Attack.Weapon", "武器攻击动作");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Montage_Attack_RightHand, "AuraGameplayTags.Montage.Attack.RightHand", "右手攻击动作");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Montage_Attack_LeftHand, "AuraGameplayTags.Montage.Attack.LeftHand", "左手攻击动作");
 }

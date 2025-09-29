@@ -22,6 +22,6 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TSubclassOf<UGameplayEffect> DamageEffectClass;
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, meta=(GameplayTagFilter="AuraGameplayTags.Damage"))
 	TMap<FGameplayTag, FScalableFloat> DamageTypes;
 };

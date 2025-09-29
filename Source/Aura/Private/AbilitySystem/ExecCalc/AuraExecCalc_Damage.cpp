@@ -46,10 +46,10 @@ struct AuraDamageStatics
 		TagsToCaptureDefs.Add(AuraGameplayTags::Attributes::Secondary::CriticalHitDamage, CriticalHitDamageDef);
 		TagsToCaptureDefs.Add(AuraGameplayTags::Attributes::Secondary::CriticalHitResistance, CriticalHitResistanceDef);
 		
-		TagsToCaptureDefs.Add(AuraGameplayTags::Resilience::Resilience_Fire, FireResistanceDef);
-		TagsToCaptureDefs.Add(AuraGameplayTags::Resilience::Resilience_Lightning, LightningResistanceDef);
-		TagsToCaptureDefs.Add(AuraGameplayTags::Resilience::Resilience_Ice, IceResistanceDef);
-		TagsToCaptureDefs.Add(AuraGameplayTags::Resilience::Resilience_Physical, PhysicalResistanceDef);
+		TagsToCaptureDefs.Add(AuraGameplayTags::Attributes::Resilience::Resilience_Fire, FireResistanceDef);
+		TagsToCaptureDefs.Add(AuraGameplayTags::Attributes::Resilience::Resilience_Lightning, LightningResistanceDef);
+		TagsToCaptureDefs.Add(AuraGameplayTags::Attributes::Resilience::Resilience_Ice, IceResistanceDef);
+		TagsToCaptureDefs.Add(AuraGameplayTags::Attributes::Resilience::Resilience_Physical, PhysicalResistanceDef);
 	}
 };
 
@@ -108,7 +108,7 @@ void UAuraExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExe
 	// 通过调用者获取伤害
 	float Damage = 0.f;
 	FGameplayTagContainer AllDamageTags = UGameplayTagsManager::Get().RequestGameplayTagChildren(AuraGameplayTags::Damage::Damage);
-	FGameplayTagContainer AllResistanceTags = UGameplayTagsManager::Get().RequestGameplayTagChildren(AuraGameplayTags::Resilience::Resilience);
+	FGameplayTagContainer AllResistanceTags = UGameplayTagsManager::Get().RequestGameplayTagChildren(AuraGameplayTags::Attributes::Resilience::Resilience);
 	for (int32 i = 0; i < AllDamageTags.Num(); ++i)
 	{
 		const FGameplayTag& DamageTag = AllDamageTags.GetByIndex(i);

@@ -5,6 +5,12 @@
 
 namespace AuraGameplayTags::Attributes
 {
+	namespace Vital
+	{
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Health);
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Mana);
+	}
+	
 	namespace Primary
 	{
 		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Strength);
@@ -26,6 +32,15 @@ namespace AuraGameplayTags::Attributes
 		UE_DECLARE_GAMEPLAY_TAG_EXTERN(MaxHealth);
 		UE_DECLARE_GAMEPLAY_TAG_EXTERN(MaxMana);
 	}
+	
+	namespace Resilience
+	{
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Resilience);
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Resilience_Fire);
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Resilience_Lightning);
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Resilience_Ice);
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Resilience_Physical);
+	}
 }
 
 namespace AuraGameplayTags::InputTags
@@ -44,15 +59,6 @@ namespace AuraGameplayTags::Damage
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Damage_Lightning);
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Damage_Ice);
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Damage_Physical);
-}
-
-namespace AuraGameplayTags::Resilience
-{
-	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Resilience);
-	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Resilience_Fire);
-	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Resilience_Lightning);
-	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Resilience_Ice);
-	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Resilience_Physical);
 }
 
 namespace AuraGameplayTags::Effects  

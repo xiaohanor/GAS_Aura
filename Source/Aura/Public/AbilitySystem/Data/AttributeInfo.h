@@ -13,7 +13,7 @@ struct FAuraAttributeInfo
 {
 	GENERATED_BODY()
  
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (Categories = "AuraGameplayTags.Attributes"))
 	FGameplayTag AttributeTag = FGameplayTag();
  
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
