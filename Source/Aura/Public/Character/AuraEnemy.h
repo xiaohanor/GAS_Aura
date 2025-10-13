@@ -23,12 +23,17 @@ public:
 	//~ IEnemyInterface
 	virtual void HighlightActor() override;
 	virtual void UnHighlightActor() override;
+	virtual void SetCombatTarget_Implementation(AActor* InCombatTarget) override;
+	virtual AActor* GetCombatTarget_Implementation() const override;
 	//~ IEnemyInterface
 
 	//~ CombatInterface
 	virtual int32 GetPlayerLevel() const override;
 	virtual void Die() override;
 	//~ CombatInterface
+
+	UPROPERTY(BlueprintReadWrite, Category = "Combat")
+	TWeakObjectPtr<AActor> CombatTarget;
 
 	UPROPERTY(BlueprintAssignable)
 	FOnAttributeChangedSignature OnHealthChanged;

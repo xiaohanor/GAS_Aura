@@ -87,17 +87,21 @@ void AAuraPlayerController::CursorTrace()
 	ThisActor = CursorHit.GetActor();
 	if (CursorHit.bBlockingHit)
 	{
-		if (LastActor != ThisActor)
+		if (LastActor == ThisActor) return;
+
+		if (ThisActor.IsValid())
 		{
-			const TScriptInterface<IEnemyInterface> LastEnemyInterface = TScriptInterface<IEnemyInterface>(LastActor.Get());
-			const TScriptInterface<IEnemyInterface> ThisEnemyInterface = TScriptInterface<IEnemyInterface>(ThisActor.Get());
-			if (LastEnemyInterface)
-			{
-				LastEnemyInterface->UnHighlightActor();
-			}
-			if (ThisEnemyInterface)
+			if (const TScriptInterface<IEnemyInterface> ThisEnemyInterface = TScriptInterface<IEnemyInterface>(ThisActor.Get()))
 			{
 				ThisEnemyInterface->HighlightActor();
+			}
+		}
+
+		if (LastActor.IsValid())
+		{
+			if (const TScriptInterface<IEnemyInterface> LastEnemyInterface = TScriptInterface<IEnemyInterface>(LastActor.Get()))
+			{
+				LastEnemyInterface->UnHighlightActor();
 			}
 		}
 	}
