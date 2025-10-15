@@ -128,6 +128,8 @@ void AAuraEnemy::InitializeDefaultAttribute() const
 void AAuraEnemy::Die()
 {
 	SetLifeSpan(LifeSpan);
+	AIController->GetBrainComponent()->StopLogic("Dead");
+	
 	Super::Die();
 }
 
