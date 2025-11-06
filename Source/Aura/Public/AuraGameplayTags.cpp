@@ -73,4 +73,5 @@ namespace AuraGameplayTags::Montage
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Montage_Attack_Weapon, "AuraGameplayTags.Montage.Attack.Weapon", "武器攻击动作");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Montage_Attack_RightHand, "AuraGameplayTags.Montage.Attack.RightHand", "右手攻击动作");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Montage_Attack_LeftHand, "AuraGameplayTags.Montage.Attack.LeftHand", "左手攻击动作");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Montage_FireBolt, "AuraGameplayTags.Montage.FireBolt", "发射火球动作");
 }
