@@ -35,6 +35,7 @@ public:
 	virtual AActor* GetAvatar_Implementation() override;
 	virtual TArray<FTaggedMontage> GetAttackMontages_Implementation() override;
 	virtual UNiagaraSystem* GetBloodEffect_Implementation() override;
+	virtual FTaggedMontage GetTaggedMontageByTag_Implementation(const FGameplayTag& MontageTag) override;
 	/** Combat Interface */
 	
 protected:
@@ -98,6 +99,9 @@ protected:
 	/* 溶解效果 */
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Combat")
-	UNiagaraSystem* BloodEffect;
+	TObjectPtr<UNiagaraSystem> BloodEffect;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Combat")
+	TObjectPtr<USoundBase> DeathSound;
 
 };

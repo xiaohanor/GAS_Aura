@@ -22,7 +22,7 @@ void UAuraGA_CastProjectile::SpawnProjectile(const FVector& TargetLocation)
 	const bool bIsServer = GetAvatarActorFromActorInfo()->HasAuthority();
 	if (!bIsServer) return;
 
-	const FVector SocketLocation = ICombatInterface::Execute_GetCombatSocketLocation(GetAvatarActorFromActorInfo(), AuraGameplayTags::Montage::Montage_Attack_Weapon);
+	const FVector SocketLocation = ICombatInterface::Execute_GetCombatSocketLocation(GetAvatarActorFromActorInfo(), AuraGameplayTags::Socket::CombatSocket_Weapon);
 	FRotator TargetRotation = (TargetLocation - SocketLocation).Rotation();
 	TargetRotation.Pitch = 0.f;
 		

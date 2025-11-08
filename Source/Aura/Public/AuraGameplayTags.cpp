@@ -70,8 +70,21 @@ namespace AuraGameplayTags::Abilities
 
 namespace AuraGameplayTags::Montage
 {
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Montage_Attack_Weapon, "AuraGameplayTags.Montage.Attack.Weapon", "武器攻击动作");
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Montage_Attack_RightHand, "AuraGameplayTags.Montage.Attack.RightHand", "右手攻击动作");
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Montage_Attack_LeftHand, "AuraGameplayTags.Montage.Attack.LeftHand", "左手攻击动作");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Montage_Attack_1, "AuraGameplayTags.Montage.Attack.1", "攻击动作1");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Montage_Attack_2, "AuraGameplayTags.Montage.Attack.2", "攻击动作2");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Montage_Attack_3, "AuraGameplayTags.Montage.Attack.3", "攻击动作3");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Montage_Attack_4, "AuraGameplayTags.Montage.Attack.4", "攻击动作4");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Montage_FireBolt, "AuraGameplayTags.Montage.FireBolt", "发射火球动作");
+}
+
+namespace AuraGameplayTags::Socket
+{
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(CombatSocket_Weapon, "AuraGameplayTags.CombatSocket.Weapon", "战斗武器插槽");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(CombatSocket_RightHand, "AuraGameplayTags.CombatSocket.RightHand", "战斗右手插槽");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(CombatSocket_LeftHand, "AuraGameplayTags.CombatSocket.LeftHand", "战斗左手插槽");
+}
+
+namespace GameplayCue
+{
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(MeleeImpact, "GameplayCue.MeleeImpact", "近战冲击效果");
 }
