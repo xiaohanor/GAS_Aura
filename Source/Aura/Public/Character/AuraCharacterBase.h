@@ -52,14 +52,17 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly,Category = "Combat")
 	TObjectPtr<USkeletalMeshComponent> Weapon;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Combat")
+	UPROPERTY(EditDefaultsOnly, Category = "Combat|Socket")
 	FName WeaponTipSocketName;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Combat")
+	UPROPERTY(EditDefaultsOnly, Category = "Combat|Socket")
 	FName LeftHandSocketName;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Combat")
+	UPROPERTY(EditDefaultsOnly, Category = "Combat|Socket")
 	FName RightHandSocketName;
+
+	UPROPERTY(EditAnywhere, Category = "Combat|Socket")
+	FName TailSocketName;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Combat")
 	TObjectPtr<UAnimMontage> HitReactMontage;

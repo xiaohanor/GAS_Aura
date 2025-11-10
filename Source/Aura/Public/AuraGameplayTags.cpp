@@ -82,6 +82,7 @@ namespace AuraGameplayTags::Socket
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(CombatSocket_Weapon, "AuraGameplayTags.CombatSocket.Weapon", "战斗武器插槽");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(CombatSocket_RightHand, "AuraGameplayTags.CombatSocket.RightHand", "战斗右手插槽");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(CombatSocket_LeftHand, "AuraGameplayTags.CombatSocket.LeftHand", "战斗左手插槽");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(CombatSocket_Tail, "AuraGameplayTags.CombatSocket.Tail", "战斗尾巴插槽");
 }
 
 namespace GameplayCue

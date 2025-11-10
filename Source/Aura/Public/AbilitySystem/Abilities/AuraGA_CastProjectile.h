@@ -22,6 +22,6 @@ protected:
 	TSubclassOf<AAuraProjectile> ProjectileClass;
 	
 private:
-	UFUNCTION(BlueprintCallable)
-	void SpawnProjectile(const FVector& TargetLocation);
+	UFUNCTION(BlueprintCallable, Meta = (GameplayTagFilter = "AuraGameplayTags.CombatSocket"))
+	void SpawnProjectile(const FVector& TargetLocation, const FGameplayTag& SocketTag);
 };
