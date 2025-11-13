@@ -66,6 +66,7 @@ namespace AuraGameplayTags::Effects
 namespace AuraGameplayTags::Abilities
 {
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Attack, "AuraGameplayTags.Abilities.Attack", "攻击");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Summon, "AuraGameplayTags.Abilities.Summon", "召唤");
 }
 
 namespace AuraGameplayTags::Montage
@@ -88,4 +89,5 @@ namespace AuraGameplayTags::Socket
 namespace GameplayCue
 {
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(MeleeImpact, "GameplayCue.MeleeImpact", "近战冲击效果");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GroundSummon, "GameplayCue.GroundSummon", "地面召唤效果");
 }

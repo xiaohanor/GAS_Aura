@@ -36,6 +36,8 @@ AAuraEnemy::AAuraEnemy()
 	bUseControllerRotationYaw = false;
 	GetCharacterMovement()->bUseControllerDesiredRotation = true;
 
+	AutoPossessAI = EAutoPossessAI::PlacedInWorldOrSpawned;
+
 	bFriendlyDamage = false;
 }
 

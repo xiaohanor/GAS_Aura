@@ -69,6 +69,7 @@ namespace AuraGameplayTags::Effects
 namespace AuraGameplayTags::Abilities
 {
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Attack);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Summon);
 }
 
 namespace AuraGameplayTags::Montage
@@ -91,4 +92,5 @@ namespace AuraGameplayTags::Socket
 namespace GameplayCue
 {
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(MeleeImpact);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(GroundSummon)
 }
