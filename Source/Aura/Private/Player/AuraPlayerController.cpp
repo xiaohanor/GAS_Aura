@@ -121,7 +121,7 @@ void AAuraPlayerController::AbilityInputTagPressed(FGameplayTag InputTag)
 	}
 }
 
-void AAuraPlayerController::CreatPathSpline()
+void AAuraPlayerController::CreatePathSpline()
 {
 	const APawn* ControlledPawn = GetPawn();
 	// 只有短按且有控制的角色时才执行
@@ -178,7 +178,7 @@ void AAuraPlayerController::AbilityInputTagReleased(FGameplayTag InputTag)
 	}
 	else
 	{
-		CreatPathSpline();
+		CreatePathSpline();
 	}
 }
 

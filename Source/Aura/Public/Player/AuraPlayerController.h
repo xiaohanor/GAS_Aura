@@ -57,7 +57,7 @@ private:
 	TObjectPtr<UAuraInputConfig> InputConfig;
 
 	void AbilityInputTagPressed(FGameplayTag InputTag);
-	void CreatPathSpline();
+	void CreatePathSpline();
 	void AbilityInputTagReleased(FGameplayTag InputTag);
 	void AbilityInputTagHeld(FGameplayTag InputTag);
 
