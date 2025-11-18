@@ -74,7 +74,7 @@ void AAuraCharacterBase::Die()
 	MulticastDie();
 }
 
-bool AAuraCharacterBase::IsFriendlyDamage() const
+bool AAuraCharacterBase::EnableFriendlyDamage() const
 {
 	return bFriendlyDamage;
 }

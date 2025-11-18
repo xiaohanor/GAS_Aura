@@ -11,6 +11,7 @@
 #include "NiagaraFunctionLibrary.h"
 #include "AbilitySystem/AuraAbilitySystemLibrary.h"
 #include "Aura/Aura.h"
+#include "Interaction/CombatInterface.h"
 
 
 AAuraProjectile::AAuraProjectile()
@@ -57,7 +58,12 @@ void AAuraProjectile::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, 
                                       UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	if (OtherActor == GetInstigator()) return;
-	if (UAuraAbilitySystemLibrary::IsOnSameTeam(OtherActor, GetInstigator())) return;
+
+	const ICombatInterface* InstigatorCombatInterface = Cast<ICombatInterface>(GetInstigator());
+	if (UAuraAbilitySystemLibrary::IsOnSameTeam(OtherActor, GetInstigator()) && !InstigatorCombatInterface->EnableFriendlyDamage())
+	{
+		return;
+	}
 	
 	UGameplayStatics::PlaySoundAtLocation(this, ImpactSound, GetActorLocation(), FRotator::ZeroRotator);
 	UNiagaraFunctionLibrary::SpawnSystemAtLocation(this, ImpactEffect, GetActorLocation());

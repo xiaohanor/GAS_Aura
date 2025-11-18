@@ -96,15 +96,11 @@ void UAuraExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExe
 	EvaluationParameters.TargetTags = TargetTags;
 
 	// 判断友伤
-	if (!SourceCombatInterface->IsFriendlyDamage())
+	if (!SourceCombatInterface->EnableFriendlyDamage() && UAuraAbilitySystemLibrary::IsOnSameTeam(SourceAvatar, TargetAvatar))
 	{
-		if (UAuraAbilitySystemLibrary::IsOnSameTeam(SourceAvatar, TargetAvatar))
-		{
-			return;
-		}
+		return;
 	}
-
-
+	
 	// 通过调用者获取伤害
 	float Damage = 0.f;
 	FGameplayTagContainer AllDamageTags = UGameplayTagsManager::Get().RequestGameplayTagChildren(AuraGameplayTags::Damage::Damage);

@@ -11,7 +11,7 @@ int32 ICombatInterface::GetPlayerLevel() const
 	return 0;
 }
 
-bool ICombatInterface::IsFriendlyDamage() const
+bool ICombatInterface::EnableFriendlyDamage() const
 {
 	return false;
 }
