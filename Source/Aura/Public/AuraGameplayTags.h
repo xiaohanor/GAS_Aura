@@ -45,11 +45,14 @@ namespace AuraGameplayTags::Attributes
 
 namespace AuraGameplayTags::InputTags
 {
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTags);
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(LMB);
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(RMB);
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(MMB);
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(one);
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(two);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(three);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(four);
 }
 
 namespace AuraGameplayTags::Damage
@@ -68,6 +71,7 @@ namespace AuraGameplayTags::Effects
 
 namespace AuraGameplayTags::Abilities
 {
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Abilities);
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Attack);
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Summon);
 

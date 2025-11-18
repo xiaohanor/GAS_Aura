@@ -22,7 +22,7 @@ struct FAuraInputAction
 	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<UInputAction> InputAction = nullptr;
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, meta=(Categories="AuraGameplayTags.InputTags"))
 	FGameplayTag InputTag = FGameplayTag();
 };
 

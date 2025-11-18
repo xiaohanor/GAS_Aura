@@ -42,11 +42,14 @@ namespace AuraGameplayTags::Attributes
 
 namespace AuraGameplayTags::InputTags
 {
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(InputTags, "AuraGameplayTags.InputTags", "输入标签");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(LMB, "AuraGameplayTags.InputTags.LMB", "鼠标左键");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(RMB, "AuraGameplayTags.InputTags.RMB", "鼠标右键");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(MMB, "AuraGameplayTags.InputTags.MMB", "鼠标中键");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(one, "AuraGameplayTags.InputTags.1", "数字键1");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(two, "AuraGameplayTags.InputTags.2", "数字键2");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(three, "AuraGameplayTags.InputTags.3", "数字键3");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(four, "AuraGameplayTags.InputTags.4", "数字键4");
 }
 
 namespace AuraGameplayTags::Damage
@@ -65,6 +68,7 @@ namespace AuraGameplayTags::Effects
 
 namespace AuraGameplayTags::Abilities
 {
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Abilities, "AuraGameplayTags.Abilities", "能力");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Attack, "AuraGameplayTags.Abilities.Attack", "攻击");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Summon, "AuraGameplayTags.Abilities.Summon", "召唤");
 
