@@ -67,6 +67,11 @@ namespace AuraGameplayTags::Abilities
 {
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Attack, "AuraGameplayTags.Abilities.Attack", "攻击");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Summon, "AuraGameplayTags.Abilities.Summon", "召唤");
+
+	namespace Fire
+	{
+		UE_DEFINE_GAMEPLAY_TAG_COMMENT(FireBolt, "AuraGameplayTags.Abilities.Fire.FireBolt", "火焰火球术");
+	}
 }
 
 namespace AuraGameplayTags::Montage

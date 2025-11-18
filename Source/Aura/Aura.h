@@ -8,3 +8,5 @@
 #define ECC_Nav ECC_GameTraceChannel1
 #define ECC_Projectile ECC_GameTraceChannel2
 
+DECLARE_LOG_CATEGORY_EXTERN(LogAura, Log, All);
+

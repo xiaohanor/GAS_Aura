@@ -70,6 +70,11 @@ namespace AuraGameplayTags::Abilities
 {
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Attack);
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Summon);
+
+	namespace Fire
+	{
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(FireBolt);
+	}
 }
 
 namespace AuraGameplayTags::Montage
