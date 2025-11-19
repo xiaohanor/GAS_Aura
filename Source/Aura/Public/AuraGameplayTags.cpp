@@ -78,6 +78,14 @@ namespace AuraGameplayTags::Abilities
 	}
 }
 
+namespace AuraGameplayTags::Cooldown
+{
+	namespace Fire
+	{
+		UE_DEFINE_GAMEPLAY_TAG_COMMENT(FireBolt, "AuraGameplayTags.Cooldown.Fire.FireBolt", "火焰火球术冷却");
+	}
+}
+
 namespace AuraGameplayTags::Montage
 {
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Montage_Attack_1, "AuraGameplayTags.Montage.Attack.1", "攻击动作1");

@@ -81,6 +81,14 @@ namespace AuraGameplayTags::Abilities
 	}
 }
 
+namespace AuraGameplayTags::Cooldown
+{
+	namespace Fire
+	{
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(FireBolt);
+	}
+}
+
 namespace AuraGameplayTags::Montage
 {
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Montage_Attack_1);
