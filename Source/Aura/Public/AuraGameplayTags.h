@@ -41,6 +41,11 @@ namespace AuraGameplayTags::Attributes
 		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Resilience_Ice);
 		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Resilience_Physical);
 	}
+
+	namespace Meta
+	{
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(IncomingXP);
+	}
 }
 
 namespace AuraGameplayTags::InputTags

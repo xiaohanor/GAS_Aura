@@ -38,6 +38,11 @@ namespace AuraGameplayTags::Attributes
 		UE_DEFINE_GAMEPLAY_TAG_COMMENT(Resilience_Lightning, "AuraGameplayTags.Attributes.Resilience.Lightning", "闪电抗性");
 		UE_DEFINE_GAMEPLAY_TAG_COMMENT(Resilience_Physical, "AuraGameplayTags.Attributes.Resilience.Physical", "物理抗性");
 	}
+	
+	namespace Meta
+	{
+		UE_DEFINE_GAMEPLAY_TAG_COMMENT(IncomingXP, "AuraGameplayTags.Attributes.Meta.IncomingXP", "获得经验值加成");
+	}
 }
 
 namespace AuraGameplayTags::InputTags

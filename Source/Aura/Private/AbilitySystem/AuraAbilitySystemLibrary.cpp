@@ -147,6 +147,17 @@ bool UAuraAbilitySystemLibrary::IsOnSameTeam(const AActor* ActorA, const AActor*
 	return bSameTeam;
 }
 
+int32 UAuraAbilitySystemLibrary::GetXPRewardForClassAndLevel(const UObject* WorldContextObject,
+	ECharacterClass CharacterClass, int32 CharacterLevel)
+{
+	UCharacterClassInfo* CharacterClassInfo = GetCharacterClassInfo(WorldContextObject);
+	if (CharacterClassInfo == nullptr) return 0;
+	
+	const FCharacterClassDefaultInfo CharacterData = CharacterClassInfo->GetClassDefaultInfo(CharacterClass);
+	const float XPReward = CharacterData.XPReward.GetValueAtLevel(CharacterLevel);
+	return FMath::RoundToInt(XPReward);
+}
+
 void UAuraAbilitySystemLibrary::ApplyEffectToASC(UAbilitySystemComponent* ASC,
                                                  const TSubclassOf<UGameplayEffect>& GameplayEffectClass, float Level)
 {

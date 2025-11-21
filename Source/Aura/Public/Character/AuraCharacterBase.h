@@ -38,6 +38,7 @@ public:
 	virtual FTaggedMontage GetTaggedMontageByTag_Implementation(const FGameplayTag& MontageTag) override;
 	virtual int32 GetMinionCount_Implementation() override;
 	virtual void UpdateMinionCount_Implementation(const int32 Amount) override;
+	virtual ECharacterClass GetCharacterClass_Implementation() override;
 	/** Combat Interface */
 	
 protected:
@@ -79,6 +80,9 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Abilities")
 	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;
+	
+	UPROPERTY(EditAnywhere, Category = "Abilities")
+	TArray<TSubclassOf<UGameplayAbility>> StartupPassiveAbilities;
 
 	void AddCharacterAbilities() const;
 	
