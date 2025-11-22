@@ -59,8 +59,7 @@ void AAuraProjectile::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, 
 {
 	if (OtherActor == GetInstigator()) return;
 
-	const ICombatInterface* InstigatorCombatInterface = Cast<ICombatInterface>(GetInstigator());
-	if (UAuraAbilitySystemLibrary::IsOnSameTeam(OtherActor, GetInstigator()) && !InstigatorCombatInterface->EnableFriendlyDamage())
+	if (UAuraAbilitySystemLibrary::IsOnSameTeam(OtherActor, GetInstigator()) && !UAuraAbilitySystemLibrary::EnableFriendlyDamage(GetInstigator()))
 	{
 		return;
 	}

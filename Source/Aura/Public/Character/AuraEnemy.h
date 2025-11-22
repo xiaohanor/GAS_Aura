@@ -28,7 +28,7 @@ public:
 	//~ IEnemyInterface
 
 	//~ CombatInterface
-	virtual int32 GetPlayerLevel() const override;
+	virtual int32 GetPlayerLevel_Implementation() const override;
 	virtual void Die() override;
 	//~ CombatInterface
 
