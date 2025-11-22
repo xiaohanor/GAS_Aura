@@ -5,6 +5,7 @@
 
 #include "AbilitySystem/AuraAbilitySystemComponent.h"
 #include "AbilitySystem/AuraAttributeSet.h"
+#include "AbilitySystem/Data/LevelUpInfo.h"
 #include "Net/UnrealNetwork.h"
 
 AAuraPlayerState::AAuraPlayerState()
@@ -45,6 +46,15 @@ void AAuraPlayerState::SetLevel(int32 NewLevel)
 void AAuraPlayerState::AddToXP(int32 DeltaXP)
 {
 	XP += DeltaXP;
+	
+	const int32 NewLevel = LevelUpInfo->FindLevelForXP(XP);
+	const int32 LevelUpCount = NewLevel - Level;
+	if (LevelUpCount > 0)
+	{
+		AddToLevel(LevelUpCount);
+		Cast<UAuraAttributeSet>(AttributeSet)->MaximizeVitalAttributes();	
+	}
+	
 	OnXPChanged.Broadcast(XP);
 }
 

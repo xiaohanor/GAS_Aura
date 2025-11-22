@@ -7,6 +7,10 @@
 #include "Interaction/PlayerInterface.h"
 #include "AuraCharacter.generated.h"
 
+class USpringArmComponent;
+class UCameraComponent;
+class UNiagaraComponent;
+
 UCLASS()
 class AURA_API AAuraCharacter : public AAuraCharacterBase, public IPlayerInterface
 {
@@ -25,8 +29,21 @@ public:
 	//~ CombatInterface
 	virtual int32 GetPlayerLevel_Implementation() const override;
 	//~ CombatInterface
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	TObjectPtr<UNiagaraComponent> LevelUpNiagaraComponent;
 
 protected:
 	virtual void InitAbilityInfo() override;
 	virtual void InitializeDefaultAttribute() const override;
+	
+private:
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr<UCameraComponent> TopDownCameraComponent;
+
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr<USpringArmComponent> CameraBoom;
+	
+	UFUNCTION(NetMulticast, Reliable)
+	void MulticastLevelUpParticles() const;
 };

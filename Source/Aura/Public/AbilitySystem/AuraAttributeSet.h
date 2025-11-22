@@ -61,6 +61,8 @@ public:
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	virtual void PreAttributeBaseChange(const FGameplayAttribute& Attribute, float& NewValue) const override;
 	virtual void PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData& Data) override;
+	
+	void MaximizeVitalAttributes();
 
 	/*
 	  * Primary Attributes
@@ -165,6 +167,10 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = "Meta Attributes", meta=(ToolTip = "伤害"))
 	FGameplayAttributeData IncomingDamage;
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, IncomingDamage);
+	
+	UPROPERTY(BlueprintReadOnly, Category = "Meta Attributes", meta=(ToolTip = "经验"))
+	FGameplayAttributeData IncomingXP;
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, IncomingXP);
  
  
 	UFUNCTION()
@@ -230,4 +236,5 @@ public:
 private:
 	void SetEffectProperties(const FGameplayEffectModCallbackData& Data, FEffectProperties& Props) const;
 	void ShowFloatingText(const FEffectProperties& Props, float Damage, bool IsCriticalHit, bool IsBlockedHit) const;
+	void SendXPEvent(const FEffectProperties& Props) const;
 };
