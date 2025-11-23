@@ -3,9 +3,11 @@
 
 #include "AbilitySystem/AuraAbilitySystemComponent.h"
 
+#include "AbilitySystemBlueprintLibrary.h"
 #include "AuraGameplayTags.h"
 #include "AbilitySystem/Abilities/AuraGameplayAbility.h"
 #include "Aura/Aura.h"
+#include "Player/AuraPlayerState.h"
 
 void UAuraAbilitySystemComponent::AbilityActorInfoSet()
 {
@@ -107,6 +109,28 @@ FGameplayTag UAuraAbilitySystemComponent::GetInputTagFromSpec(const FGameplayAbi
 	}
 	
 	return FGameplayTag();
+}
+
+void UAuraAbilitySystemComponent::UpgradeAttribute(const FGameplayTag& AttributeTag)
+{
+	const AAuraPlayerState* AuraPlayerState = Cast<AAuraPlayerState>(GetOwner());
+	if (IsValid(AuraPlayerState) && AuraPlayerState->GetAttributePoints() > 0)
+	{
+		ServerUpgradeAttribute(AttributeTag);
+	}
+}
+
+void UAuraAbilitySystemComponent::ServerUpgradeAttribute_Implementation(const FGameplayTag& AttributeTag)
+{
+	FGameplayEventData Payload;
+	Payload.EventTag = AttributeTag;
+	Payload.EventMagnitude = 1.f;
+	UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(GetAvatarActor(), AttributeTag, Payload);
+
+	if (AAuraPlayerState* AuraPlayerState = Cast<AAuraPlayerState>(GetOwner()); IsValid(AuraPlayerState))
+	{
+		AuraPlayerState->AddToAttributePoints(-1);
+	}
 }
 
 void UAuraAbilitySystemComponent::OnRep_ActivateAbilities()

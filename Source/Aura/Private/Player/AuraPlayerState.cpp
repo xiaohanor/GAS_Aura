@@ -52,6 +52,8 @@ void AAuraPlayerState::AddToXP(int32 DeltaXP)
 	if (LevelUpCount > 0)
 	{
 		AddToLevel(LevelUpCount);
+		AddToAttributePoints(LevelUpCount);
+		AddToSpellPoints(LevelUpCount);
 		Cast<UAuraAttributeSet>(AttributeSet)->MaximizeVitalAttributes();	
 	}
 	
@@ -64,6 +66,18 @@ void AAuraPlayerState::AddToLevel(int32 DeltaLevel)
 	OnLevelChanged.Broadcast(Level);
 }
 
+void AAuraPlayerState::AddToAttributePoints(int32 InPoints)
+{
+	AttributePoints += InPoints;
+	OnAttributePointsChanged.Broadcast(AttributePoints);
+}
+
+void AAuraPlayerState::AddToSpellPoints(int32 InPoints)
+{
+	SpellPoints += InPoints;
+	OnSpellPointsChanged.Broadcast(SpellPoints);
+}
+
 void AAuraPlayerState::OnRep_Level(int32 OldLevel)
 {
 	OnLevelChanged.Broadcast(Level);
@@ -72,4 +86,14 @@ void AAuraPlayerState::OnRep_Level(int32 OldLevel)
 void AAuraPlayerState::OnRep_XP(int32 OldXP)
 {
 	OnXPChanged.Broadcast(XP);
+}
+
+void AAuraPlayerState::OnRep_AttributePoints(int32 OldAttributePoints)
+{
+	OnAttributePointsChanged.Broadcast(AttributePoints);
+}
+
+void AAuraPlayerState::OnRep_SpellPoints(int32 OldSpellPoints)
+{
+	OnSpellPointsChanged.Broadcast(SpellPoints);
 }
