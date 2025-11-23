@@ -6,6 +6,7 @@
 #include "AbilitySystemInterface.h"
 #include "AbilitySystem/AuraAttributeSet.h"
 #include "GameFramework/PlayerState.h"
+#include "Interaction/ModifierDependencyInterface.h"
 #include "AuraPlayerState.generated.h"
 
 class ULevelUpInfo;
@@ -18,7 +19,7 @@ DECLARE_MULTICAST_DELEGATE_OneParam(FOnPlayerStatusChanged, int32 /*NewValue*/);
  * 
  */
 UCLASS()
-class AURA_API AAuraPlayerState : public APlayerState, public IAbilitySystemInterface
+class AURA_API AAuraPlayerState : public APlayerState, public IAbilitySystemInterface, public IModifierDependencyInterface
 {
 	GENERATED_BODY()
 
@@ -29,6 +30,10 @@ public:
 	UAttributeSet* GetAttributeSet() const { return AttributeSet; }
 	ULevelUpInfo* GetLevelUpInfo() const { return LevelUpInfo; }
 	
+	//~ ModifierDependencyInterface
+	virtual FOnExternalGameplayModifierDependencyChange* GetOnModifierDependencyChanged() override { return &OnModifierDependencyChanged; }
+	//~ ModifierDependencyInterface
+
 	FOnPlayerStatusChanged OnXPChanged;
 	FOnPlayerStatusChanged OnLevelChanged;
 	FOnPlayerStatusChanged OnAttributePointsChanged;
@@ -56,7 +61,9 @@ private:
 	
 	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<ULevelUpInfo> LevelUpInfo;
-
+	
+	FOnExternalGameplayModifierDependencyChange OnModifierDependencyChanged;
+	
 	UPROPERTY(VisibleAnywhere, ReplicatedUsing=OnRep_Level)
 	int32 Level = 1;
 

@@ -54,7 +54,6 @@ void AAuraPlayerState::AddToXP(int32 DeltaXP)
 		AddToLevel(LevelUpCount);
 		AddToAttributePoints(LevelUpCount);
 		AddToSpellPoints(LevelUpCount);
-		Cast<UAuraAttributeSet>(AttributeSet)->MaximizeVitalAttributes();	
 	}
 	
 	OnXPChanged.Broadcast(XP);
@@ -63,6 +62,12 @@ void AAuraPlayerState::AddToXP(int32 DeltaXP)
 void AAuraPlayerState::AddToLevel(int32 DeltaLevel)
 {
 	Level += DeltaLevel;
+	
+	//升级时强制让MMC_MaxHealth和MMC_MaxMana重新计算
+	OnModifierDependencyChanged.Broadcast();
+	// 升级时将生命值和法力值恢复到最大值
+	Cast<UAuraAttributeSet>(AttributeSet)->MaximizeVitalAttributes();	
+
 	OnLevelChanged.Broadcast(Level);
 }
 
